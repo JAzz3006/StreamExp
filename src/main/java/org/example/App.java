@@ -37,8 +37,13 @@ public class App{
         }else {
             System.out.println("empty!");
         }
-        }
-    //IntStream sos = "whatever".chars().reduce((c1, c2) -> );
+        String w = "whatever";
+        w.chars()
+                .map(c -> c + 1)
+                .collect(Collectors.toList());
+
+
+    }
 
     public static String capitalizer (String input){
         input = input.trim();
