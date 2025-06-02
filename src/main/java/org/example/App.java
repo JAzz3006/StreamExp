@@ -38,9 +38,11 @@ public class App{
             System.out.println("empty!");
         }
         String w = "whatever";
-        w.chars()
+        List<Integer> intList = w.chars()
                 .map(c -> c + 1)
-                .collect(Collectors.toList());
+                .boxed()
+                .toList();
+        intList.forEach(System.out::println);
 
 
     }
