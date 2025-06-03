@@ -6,7 +6,40 @@ import java.util.stream.Collectors;
 public class Tst2 {
     public static final List<String> VOWELS_LIST = List.of("a", "e", "i", "o", "u", "y");
     public static void main(String[] args) {
-        //начало задачи на флатмап №4
+        //начало леккой задачи на мап №6
+        List<String> animalos = List.of(
+                "elephant", "cat", "hippopotamus", "dog", "giraffe"
+        );
+        Map<Integer, List<String>> animalityMap = animalos.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.groupingBy(
+                        String::length,
+                        () -> new TreeMap<>(Comparator.reverseOrder()),
+                        Collectors.toList()
+                ));
+        animalityMap.forEach((key, value) -> System.out.println(key + " -> " + value));
+
+
+        //конец легкой задачи на мап №6
+        //начало задачи на флатмап №5
+        List<List<String>> wordGroups1 = List.of(
+                List.of("cat", "dog"),
+                List.of("elephant", "tiger"),
+                List.of("hippo", "giraffe")
+        );
+        TreeSet<String> myWordsSet = wordGroups1.stream()
+                .flatMap(Collection::stream)
+                .flatMap(s -> Arrays.stream(s.split("")))
+                .map(String::toLowerCase)
+                .collect(TreeSet::new,
+                        TreeSet::add,
+                        TreeSet::addAll);
+        //System.out.println(myWordsSet);
+
+
+        // конец задачи на флатмап №5
+
+        // начало задачи на флатмап №4
         List<String> sentences = List.of(
                 "Java is cool",
                 "Streams are powerful in Java",
@@ -20,8 +53,7 @@ public class Tst2 {
                         TreeSet::add,
                         TreeSet::addAll
                 );
-        System.out.println(wordSet);
-
+        //System.out.println(wordSet);
         //конец задачи на флатмап №4
         //начало задачи на флатмап №3
         List<String> linez = List.of(
