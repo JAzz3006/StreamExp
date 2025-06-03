@@ -6,7 +6,29 @@ import java.util.stream.Collectors;
 public class Tst2 {
     public static final List<String> VOWELS_LIST = List.of("a", "e", "i", "o", "u", "y");
     public static void main(String[] args) {
-        //начало леккой задачи на мап №6
+        //начало задачи №7
+        List<String> sentencez = List.of(
+                "Java is powerful",
+                "Streams are great",
+                "FlatMap is useful",
+                "Coding is fun"
+        );
+        Map<Character, List<String>> mapOfAnswers = sentencez.stream()
+                .flatMap(stc -> Arrays.stream(stc.split("\\s+")))
+                .filter(s -> s.length() > 3)
+                .map(String::toLowerCase)
+                .collect(Collectors.groupingBy(
+                        s -> s.charAt(0),
+                        TreeMap::new,
+                        Collectors.toList()
+                ));
+        mapOfAnswers.forEach((key, value) -> System.out.println(key + " - " + value));
+
+
+
+        // конец задачи №7
+
+        // начало леккой задачи на мап №6
         List<String> animalos = List.of(
                 "elephant", "cat", "hippopotamus", "dog", "giraffe"
         );
@@ -17,7 +39,7 @@ public class Tst2 {
                         () -> new TreeMap<>(Comparator.reverseOrder()),
                         Collectors.toList()
                 ));
-        animalityMap.forEach((key, value) -> System.out.println(key + " -> " + value));
+        //animalityMap.forEach((key, value) -> System.out.println(key + " -> " + value));
 
 
         //конец легкой задачи на мап №6
