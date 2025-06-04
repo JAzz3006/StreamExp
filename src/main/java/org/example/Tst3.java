@@ -18,6 +18,7 @@ public class Tst3 {
                                 Collectors.toList())
                 ));
         resultMap.forEach((key, value) -> System.out.println(key + " - " + value));
+        //&&
 
     }
 }
