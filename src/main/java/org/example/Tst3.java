@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Tst3 {
     public static final int THRESHOLD_SALARY = 70000;
+    public static final String RUS_LETTERS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя";
     public static void main(String[] args) {
 
         List<Employee> payroll = Employee.hireEmployees();
@@ -44,8 +45,27 @@ public class Tst3 {
 //            System.out.println(key + " Department");
 //            value.forEach(System.out::println);
 //        });
+    List<String> listOfStrings = ListOfStrings.listOfStringsGen();
+    TreeMap<Character, Long> rndList = listOfStrings.stream()
+            .flatMap(s -> Arrays.stream(s.split("")))
+            .map(String::toLowerCase)
+            .filter(s -> RUS_LETTERS.indexOf(s.charAt(0)) >= 0)
+            .collect(Collectors.groupingBy(
+                    s -> s.charAt(0),
+                    TreeMap::new,
+                    Collectors.counting()
+            ));
+    LinkedHashMap<Character, Long> sortedBFreq = rndList.entrySet().stream()
+            .sorted(Map.Entry.<Character, Long>comparingByValue().reversed())
+            .collect(Collectors.toMap(
+                    Map.Entry::getKey,
+                    Map.Entry::getValue,
+                    Long::sum,
+                    LinkedHashMap::new
+            ));
+    sortedBFreq.forEach((key, value) -> System.out.println(key + " - " + value));
 
-//        });
+
 
     }
 }
