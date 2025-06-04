@@ -22,7 +22,8 @@ public class Employee {
                 new Employee("Charlie", "IT", 95000),
                 new Employee("Diana", "Finance", 70000),
                 new Employee("Eve", "HR", 62000),
-                new Employee("Frank", "Finance", 72000)
+                new Employee("Frank", "Finance", 72000),
+                new Employee("Paul", "Finance", 72000)
         );
     }
 
