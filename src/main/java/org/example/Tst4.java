@@ -1,20 +1,59 @@
 package org.example;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Tst4 {
     public static void main(String[] args) {
         List<User> users = User.userListBuilder();
+        //задача №5
+        Map<Character, List<String>> experimentalList = users.stream()
+                .filter(user -> user.getAge() < 39 && user.getAge() > 20)
+                .map(user -> user.getName() + " - " + user.getAge())
+                .collect(Collectors.groupingBy(
+                        s -> s.charAt(0)
+                ));
+        experimentalList.forEach((key, value) -> System.out.println(key + " - " + value));
+
+
+
+        //задача №4
+        Map<Integer, List<String>> superMap = users.stream()
+                .collect(Collectors.filtering(
+                        user -> user.getAge() < 30,
+                        Collectors.flatMapping(
+                                user -> user.getOrders().stream(),
+                                Collectors.groupingBy(
+                                        Order::getPrice,
+                                        () -> new TreeMap<>(Comparator.reverseOrder()),
+                                        Collectors.mapping(
+                                                order -> order.getProduct() + " (Id = " + order.getId() + ")",
+                                                Collectors.toList()
+                                        )
+                                )
+                        )
+                        )
+                );
+        //superMap.forEach((k, v) -> System.out.println(k + " - " + v));
+
+
+
         //задача №3
         Set<String> products = users.stream()
                 .flatMap(user -> user.getOrders().stream())
                 .map(Order::getProduct)
                 .collect(Collectors.toCollection(
-                        TreeSet::new
+                        LinkedHashSet::new
                         )
                 );
-        products.forEach(System.out::println);
+        Map<Character, List<String>> groupedByFirstLetter = products.stream()
+                .collect(Collectors.groupingBy(
+                        s -> s.charAt(0),
+                        TreeMap::new,
+                        Collectors.toList()
+                ));
+        //groupedByFirstLetter.forEach((k, v) -> System.out.println(k + " - " + v));
 
         //задача №1
         //так создаем Компаратор
