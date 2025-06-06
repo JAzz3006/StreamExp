@@ -49,7 +49,7 @@ public class User {
                 new User("Frank", "London", 33,
                         List.of(new Order("Cap", 40),
                                 new Order("Donkey turds", 25),
-                                new Order("Simon and Garfunkel", 560)))
+                                new Order("Simon and Garfunkel", 640)))
         );
     }
 

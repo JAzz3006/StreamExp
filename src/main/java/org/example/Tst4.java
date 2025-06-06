@@ -14,7 +14,7 @@ public class Tst4 {
                 .collect(Collectors.groupingBy(
                         s -> s.charAt(0)
                 ));
-        experimentalList.forEach((key, value) -> System.out.println(key + " - " + value));
+        //experimentalList.forEach((key, value) -> System.out.println(key + " - " + value));
 
 
 
@@ -61,6 +61,15 @@ public class Tst4 {
                 .comparingInt(Order::getPrice)
                 .thenComparing(Order::getProduct)
                 .thenComparing(Order::getId);
+
+        Optional<Order> order = users.stream()
+                .flatMap(user -> user.getOrders().stream())
+                .max(orderPriceComparator);
+        if (order.isPresent()){
+            System.out.println(order.get().getPrice() + " - " + order.get().getProduct());
+        }else System.out.println("It's empty");
+
+
 
         Set<Order> orders = users.stream()
                 .flatMap(user -> user.getOrders().stream())
