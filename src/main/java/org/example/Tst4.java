@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 public class Tst4 {
     public static void main(String[] args) {
         List<User> users = User.userListBuilder();
+        //задача №6
+        boolean b = users.stream()
+                .anyMatch(u -> u.getName().matches("Y[a-zA-Z]+"));
+        System.out.println(b);
         //задача №5
         Map<Character, List<String>> experimentalList = users.stream()
                 .filter(user -> user.getAge() < 39 && user.getAge() > 20)
